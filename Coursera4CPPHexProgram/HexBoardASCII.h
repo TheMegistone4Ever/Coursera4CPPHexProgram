@@ -14,7 +14,7 @@ public:
 	HexBoard(short size = 7) : size(size), board(new short*[size]) {
 		for (int i = 0; i < size; i++) {
 			board[i] = new short[size];
-			for (int j = 0; j < size; j++) board[i][j] = 0;
+			for (int j = 0; j < size; j++) board[i][j] = 10*i+j;
 		}
 	}
 	~HexBoard() {
@@ -37,6 +37,13 @@ public:
 			cerr << "There is already another player's move at position i:" << i << " j:" << j << endl;
 			return false;
 		}
+
+		bool cond = true;
+
+		if (cond) {
+			cerr << "This move is too far from your cell!" << endl;
+		}
+
 		board[i][j] = player;
 		cout << "The move was made successfully!" << endl;
 		return true;
