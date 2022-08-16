@@ -1,12 +1,11 @@
 ﻿// Peer-graded Assignment: Homework 1: Implement Hex Board,
 // by Nickita Kyselyov, NTUU KPI nb. Igor Sikorsky, 2nd grade, FICT, IS-13,
-// 15.08.2022
+// 16.08.2022
 
 #include "HexBoardASCII.h"
 
 int main(int argc, char const* argv[]) {
     //srand(static_cast<unsigned int>(time(nullptr)));
-
     short size; cout << "Input size of a game: "; cin >> size;
 
     HexBoard board(size);
@@ -18,8 +17,12 @@ int main(int argc, char const* argv[]) {
         short j;  cout << "j: "; cin >> j;
         if (!board.makeMoveIn(i, j, k % 2 + 1)) k--;
         board.print();
+        short win = board.hasWon();
+        if (win) {
+            cout << "WON PLAYER #" << win << endl;
+            break;
+        }
     }
-
 
     return EXIT_SUCCESS;
 }
