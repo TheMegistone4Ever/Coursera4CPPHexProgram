@@ -153,12 +153,6 @@ public:
                 if (!visited[adj.v] && dist[nearest] != INF && dist[nearest] + adj.w < dist[adj.v])
                     prev[adj.v] = nearest, dist[adj.v] = dist[nearest] + adj.w;
         }
-        printAdjacencyList(al);
-
-        cout << "DIST:";
-        for (T1 i = 0; i < V - 1; i++) cout << ' ' << dist[i];
-        cout << endl;
-
         return make_pair(dist, prev);
     }
 
