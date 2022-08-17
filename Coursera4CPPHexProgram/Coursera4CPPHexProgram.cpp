@@ -16,7 +16,7 @@ int main(int argc, char const* argv[]) {
         try {
         short i;  cout << "i: "; cin >> i;
         short j;  cout << "j: "; cin >> j;
-            if (!board.makeMoveIn(i, j, k % 2 + 1)) k--;
+            if (!board.makeMoveIn(i, j, static_cast<player>(k % 2 + 1))) k--;
         } catch (const exception& e) { break; }
         board.print();
         short win = board.hasWon();
