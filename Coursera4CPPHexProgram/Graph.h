@@ -100,7 +100,7 @@ public:
     }
 
     // Print the adjacency list representation of graph
-    void printAdjacencyList(vector<edge>* al = nullptr) {
+    void printAdjacencyList(vector<edge>* al = nullptr) const {
         if (al == nullptr) al = adjacencyList;
         T1 w = static_cast<T1>(log10(V)) + 1;
         for (T1 v = 0; v < V; v++) {
