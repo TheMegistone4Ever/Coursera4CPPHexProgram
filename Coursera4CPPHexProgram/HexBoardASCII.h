@@ -1,6 +1,5 @@
 #pragma once
 #include "Graph.h"
-using namespace std;
 inline void printStrs(short n, const char* s) { for (int i = 0; i < n; i++) cout << s; }
 enum class player : short { NONE, BLUE, RED };
 ostream& operator<<(ostream& output, const player& p) {
