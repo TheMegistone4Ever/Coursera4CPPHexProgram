@@ -112,7 +112,4 @@ public:
 		for (int j = 0; j < size - 1; j++) cout << board[size - 1][j] << " - ";
 		cout << board[size - 1][size - 1] << endl;
 	}
-
-
-
 };
