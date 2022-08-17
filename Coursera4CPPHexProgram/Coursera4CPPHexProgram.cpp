@@ -1,6 +1,6 @@
 ﻿// Peer-graded Assignment: Homework 1: Implement Hex Board,
 // by Nickita Kyselyov, NTUU KPI nb. Igor Sikorsky, 2nd grade, FICT, IS-13,
-// 16.08.2022
+// 17.08.2022
 
 #include "HexBoardASCII.h"
 
