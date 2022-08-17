@@ -45,11 +45,6 @@ public:
 		delete[] board;
 	}
 
-	// Add edge to a game graph
-	inline void addEdgeToGame(short i1, short j1, short i2, short j2, player player) {
-		game.addEdge({ 1, size * i1 + j1, size * i2 + j2, static_cast<color>(player) });
-	}
-
 	// Checking if someone has won
 	player hasWon() {
 		if (game.dijkstra(size, 0, 0, 1).first[size * size - 1] != INF) return player::BLUE;
@@ -59,13 +54,18 @@ public:
 
 	// Takes a move to a given position
 	bool makeMoveIn(short i, short j, player p) {
-		if (i < 1 || i > size - 2 || j < 1 || j > size - 2 || board[i][j] != player::NONE || isTooFar(i, j, p)) {
+		if (i < 1 || i > size - 2 || j < 1 || j > size - 2 || board[i][j] != player::NONE) {
 			cerr << "Invalid move!" << endl;
 			return false;
 		}
 		addCell(i, j, p);
 		cout << "The move was made successfully!" << endl;
 		return true;
+	}
+
+	// Add edge to a game graph
+	inline void addEdgeToGame(short i1, short j1, short i2, short j2, player player) {
+		game.addEdge({ 1, size * i1 + j1, size * i2 + j2, static_cast<color>(player) });
 	}
 
 	// Add a cell - add paths (edges) to all 6 neighbors
@@ -81,18 +81,6 @@ public:
 		addEdgeToGame(i, j, iInc, j, p);
 		addEdgeToGame(i, j, iInc, jDec, p);
 		board[i][j] = p;
-	}
-
-	// Check if this move is too far from your cells
-	bool isTooFar(short i, short j, player p) {
-		if (board[i][j - 1] == p ||
-			board[i - 1][j] == p ||
-			board[i - 1][j + 1] == p ||
-			board[i][j + 1] == p ||
-			board[i + 1][j] == p ||
-			board[i + 1][j - 1] == p)
-			return false;
-		return true;
 	}
 
 	// Displays the game board
