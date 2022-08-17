@@ -33,8 +33,8 @@ public:
 
 	// Checking if someone has won
 	short hasWon() {
-		if (game.dijkstra(0, 0, 0, 1).first[this->size - 1] != INF) return 1;
-		if (game.dijkstra(this->size / 2, 1, 0, 0).first[this->size * this->size - this->size / 2] != INF) return 2;
+		if (game.dijkstra(0, 0).first[this->size - 1] != INF) return 1;
+		if (game.dijkstra(1, 1).first[this->size * this->size - 1] != INF) return 2;
 		return 0;
 	}
 

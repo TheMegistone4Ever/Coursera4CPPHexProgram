@@ -79,19 +79,19 @@ public:
     // Add an edge in an undirected graph, return true if edge was added succesfully
     bool addEdge(edge e) {
         if (e.u == e.v) return false; // No loops in this graph
-        for (const edge& way : adjacencyList[e.u]) if (way.u == e.v) return false; // No dublicates in this graph
-        adjacencyList[e.u].push_back(e);
-        adjacencyList[e.v].push_back(e);
-        edges.push_back(e);
+        for (const edge& way : this->adjacencyList[e.u]) if (way.u == e.v && way.c == e.c) return false; // No dublicates in this graph
+        this->adjacencyList[e.u].push_back(e);
+        this->adjacencyList[e.v].push_back(e);
+        this->edges.push_back(e);
         switch (e.c) {
         case color::RED:
-            redEdges.push_back(e);
+            this->redEdges.push_back(e);
             break;
         case color::GREEN:
-            greenEdges.push_back(e);
+            this->greenEdges.push_back(e);
             break;
         case color::BLUE:
-            blueEdges.push_back(e);
+            this->blueEdges.push_back(e);
             break;
         default:
             cerr << "ERROR COLOR: " << static_cast<int>(e.c) << endl;
@@ -137,7 +137,6 @@ public:
         if (r && g && b) al = adjacencyList;
         else {
             if (r) filter.insert(filter.end(), redEdges.begin(), redEdges.end());
-            if (g) filter.insert(filter.end(), greenEdges.begin(), greenEdges.end());
             if (b) filter.insert(filter.end(), blueEdges.begin(), blueEdges.end());
             al = createALFromVector(filter);
         }
@@ -153,6 +152,8 @@ public:
                 if (!visited[adj.v] && dist[nearest] != INF && dist[nearest] + adj.w < dist[adj.v])
                     prev[adj.v] = nearest, dist[adj.v] = dist[nearest] + adj.w;
         }
+        cout << "RED: " << r << endl;
+        for (T1 i = 0; i < V - 1; i++) cout << " d:" << dist[i]; cout << endl;
         return make_pair(dist, prev);
     }
 
