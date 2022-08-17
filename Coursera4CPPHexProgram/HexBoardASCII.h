@@ -52,10 +52,10 @@ public:
 	}
 
 	// Checking if someone has won
-	short hasWon() {
-		if (game.dijkstra(size, 0, 0, 1).first[size * size - 1] != INF) return 1;
-		if (game.dijkstra(0, 1, 0, 0).first[size*(size-1)-1] != INF) return 2;
-		return 0;
+	player hasWon() {
+		if (game.dijkstra(size, 0, 0, 1).first[size * size - 1] != INF) return player::BLUE;
+		if (game.dijkstra(0, 1, 0, 0).first[size*(size-1)-1] != INF) return player::RED;
+		return player::NONE;
 	}
 
 	// Takes a move to a given position

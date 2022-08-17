@@ -19,9 +19,9 @@ int main(int argc, char const* argv[]) {
             if (!board.makeMoveIn(i, j, static_cast<player>(k % 2 + 1))) k--;
         } catch (const exception& e) { break; }
         board.print();
-        short win = board.hasWon();
-        if (win) {
-            cout << "WON PLAYER #" << win << endl;
+        player win = board.hasWon();
+        if (win != player::NONE) {
+            cout << "WON PLAYER: " << win << endl;
             break;
         }
         if (k == size * size - 1) cout << "DRAW!" << endl;
