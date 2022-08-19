@@ -1,5 +1,6 @@
 #pragma once
 #include "Graph.h"
+const int generations = 100;
 inline void printStrs(short n, const char* s) { for (int i = 0; i < n; i++) cout << s; }
 enum class player : short { NONE, BLUE, RED };
 ostream& operator<<(ostream& output, const player& p) {
@@ -27,17 +28,17 @@ class HexBoard {
 	player** board;
 	Graph<short, short> game;
 public:
-	HexBoard(short size = 7) : size(size + 2), board(new player* [this->size]), game(this->size * this->size, 0) {
+	HexBoard(short size = 11) : size(size + 2), board(new player* [this->size]), game(this->size * this->size, 0) {
 		for (int i = 0; i < this->size; i++) {
 			board[i] = new player[this->size];
 			for (int j = 0; j < this->size; j++) board[i][j] = player::NONE;
 		}
 		// Bounds
-		for (int k = 0; k < this->size; k++) {
+		for (int k = 0; k < this->size - 1; k++) {
 			addCell(k, 0, player::BLUE);
+			addCell(k + 1, this->size - 1, player::BLUE);
+			addCell(0, k + 1, player::RED);
 			addCell(this->size - 1, k, player::RED);
-			addCell(0, k, player::RED);
-			addCell(k, this->size - 1, player::BLUE);
 		}
 	}
 	~HexBoard() {
@@ -47,8 +48,8 @@ public:
 
 	// Checking if someone has won
 	player hasWon() {
-		if (game.dijkstra(size, 0, 0, 1).first[size * size - 1] != INF) return player::BLUE;
-		if (game.dijkstra(0, 1, 0, 0).first[size*(size-1)-1] != INF) return player::RED;
+		if (game.dijkstra(0, 0, 0, 1).first[size * size - 1] != INF) return player::BLUE;
+		if (game.dijkstra(1, 1, 0, 0).first[size * size - 2] != INF) return player::RED;
 		return player::NONE;
 	}
 
@@ -59,8 +60,13 @@ public:
 			return false;
 		}
 		addCell(i, j, p);
-		cout << "The move was made successfully!" << endl;
+		cout << "The move in i=" << i << ", j=" << j << " was made successfully!" << endl;
 		return true;
+	}
+
+	// sdfsdfs
+	pair<short, short> calcBestMove(player p) {
+		return make_pair(rand() % (size - 2) + 1, rand() % (size - 2) + 1 );
 	}
 
 	// Add edge to a game graph
