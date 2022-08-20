@@ -10,7 +10,6 @@ int main(int argc, char const* argv[]) {
     bool isAI; cout << "What game mode do you want? (0-player vs player, 1-player vs AI) "; cin >> isAI;
     bool first; cout << "Who will go first? (0-" << (isAI ? "AI, 1-player) " : "player #1, 1-player #2) "); cin >> first;
 
-
     HexBoard board(size);
     board.print();
     player win;
@@ -37,7 +36,6 @@ int main(int argc, char const* argv[]) {
             if ((win = board.hasWon()) != player::NONE) break;
         }
     }
-
 
     cout << "WINNER: " << win << endl;
     return EXIT_SUCCESS;
