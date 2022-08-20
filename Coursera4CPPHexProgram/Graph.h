@@ -5,7 +5,7 @@
 #include <vector>
 #include <algorithm>
 #include <fstream>
-const double INF = 9999;
+const int INF = 9999;
 const int COLORS = 3;
 using namespace std;
 inline double drand(double d, double u) { return d + (static_cast<double>(rand()) / RAND_MAX) * (u - d); }
@@ -144,7 +144,7 @@ public:
         T2* dist = new T2[V];
         T1* prev = new T1[V];
         bool* visited = new bool[V];
-        for (T1 i = 0; i < V; i++) dist[i] = INF, prev[i] = -1, visited[i] = false;
+        for (T1 i = 0; i < V; i++) dist[i] = static_cast<T2>(INF), prev[i] = -1, visited[i] = false;
         dist[source] = 0, prev[source] = source;
         for (T1 i = 0; i < V - 1; i++) {
             T1 nearest = minDistance(dist, visited);

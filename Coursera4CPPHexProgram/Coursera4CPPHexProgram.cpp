@@ -1,6 +1,6 @@
 ﻿// Peer-graded Assignment: Implement Monte Carlo Hex move evaluation,
 // by Nickita Kyselyov, NTUU KPI nb. Igor Sikorsky, 2nd grade, FICT, IS-13,
-// 19.08.2022
+// 20.08.2022
 
 #include "HexBoardASCII.h"
 
@@ -24,16 +24,15 @@ int main(int argc, char const* argv[]) {
                 pair<short, short> move = board.calcBestMove(static_cast<player>((k + first) % 2 + 1));
                 i = move.first, j = move.second;
             }
-            if (!board.makeMoveIn(i, j, static_cast<player>((k + first) % 2 + 1))) k--;
+            if (!board.makeMoveIn(i, j, static_cast<player>((k + first) % 2 + 1), true)) k--;
             board.print();
             if ((win = board.hasWon()) != player::NONE) break;
         }
-    }
-    else {
+    } else {
         for (short k = 0; k < size * size; k++) {
             cout << "Player #" << (k + first) % 2 + 1 << " make move! (Input \'i\' and \'j\')" << endl;
             short i, j;  cout << "i: "; cin >> i; cout << "j: "; cin >> j;
-            if (!board.makeMoveIn(i, j, static_cast<player>((k + first) % 2 + 1))) k--;
+            if (!board.makeMoveIn(i, j, static_cast<player>((k + first) % 2 + 1), true)) k--;
             board.print();
             if ((win = board.hasWon()) != player::NONE) break;
         }
